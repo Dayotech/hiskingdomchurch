@@ -1,38 +1,31 @@
  const navMenu = document.getElementById("navMenu");
 const menuBtn = document.getElementById("menuBtn");
 const topBtn = document.querySelector(".top-btn");
+const loader = document.getElementById("loader");
+
+window.addEventListener("load", function () {
+  if (loader) {
+    loader.style.display = "none";
+  }
+});
 
 if (menuBtn && navMenu) {
   menuBtn.addEventListener("click", function () {
     navMenu.classList.toggle("show");
-
-    if (navMenu.classList.contains("show")) {
-      menuBtn.innerHTML = "✖";
-    } else {
-      menuBtn.innerHTML = "☰";
-    }
+    menuBtn.innerHTML = navMenu.classList.contains("show") ? "✖" : "☰";
   });
 }
 
-const navLinks = document.querySelectorAll(".nav a");
-
-navLinks.forEach(function (link) {
+document.querySelectorAll(".nav a").forEach(function (link) {
   link.addEventListener("click", function () {
-    navMenu.classList.remove("show");
-
-    if (menuBtn) {
-      menuBtn.innerHTML = "☰";
-    }
+    if (navMenu) navMenu.classList.remove("show");
+    if (menuBtn) menuBtn.innerHTML = "☰";
   });
 });
 
 window.addEventListener("scroll", function () {
   if (topBtn) {
-    if (window.scrollY > 300) {
-      topBtn.style.display = "block";
-    } else {
-      topBtn.style.display = "none";
-    }
+    topBtn.style.display = window.scrollY > 300 ? "block" : "none";
   }
 });
 
